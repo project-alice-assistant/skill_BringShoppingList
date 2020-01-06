@@ -55,7 +55,7 @@
 	"add_multi": {
 		"default": [
 			"Ok, ich schreibe {} auf den Einkaufszettel",
-			"Ich habe {} auf den Einkaufszettel geschrieb",
+			"Ich habe {} auf den Einkaufszettel geschrieben",
 			"{} wurden auf die Einkaufsliste geschrieben",
 			"Ich schreibe folgendes auf die Einkaufsliste: {}"
 		],
