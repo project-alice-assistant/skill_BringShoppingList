@@ -10,6 +10,24 @@
 			"useSynonyms": true,
 			"values": [
 				{
+					"value": "Verlängerungskabel"
+				},
+				{
+					"value": "Vierfachstecker"
+				},
+				{
+					"value": "Dreifachstecker"
+				},
+				{
+					"value": "Doppelstecker"
+				},
+				{
+					"value": "Steckdosenleiste"
+				},
+				{
+					"value": "Blattspinat"
+				},
+				{
 					"value": "Rahm"
 				},
 				{
@@ -5360,6 +5378,45 @@
 				},
 				{
 					"value": "Tee"
+				},
+				{
+					"value": "Kamilletee"
+				},
+				{
+					"value": "Beerentee"
+				},
+				{
+					"value": "Waldbeerentee"
+				},
+				{
+					"value": "Chai Tee"
+				},
+				{
+					"value": "Roiboos Tee"
+				},
+				{
+					"value": "Wintertee"
+				},
+				{
+					"value": "Darjeeling"
+				},
+				{
+					"value": "Ceylon Tee"
+				},
+				{
+					"value": "Earl Gray"
+				},
+				{
+					"value": "Assam Tee"
+				},
+				{
+					"value": "Wintertee"
+				},
+				{
+					"value": "Fenchel Tee"
+				},
+				{
+					"value": "Roiboos Tee"
 				},
 				{
 					"value": "Früchtetee"
