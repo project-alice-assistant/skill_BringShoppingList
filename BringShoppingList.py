@@ -101,12 +101,12 @@ class BringShoppingList(AliceSkill):
 		internal method to add a list of items to the shopping list
 		:returns: two splitted lists of successfull adds and items that already existed.
 		"""
-		bringItems = self.bring().get_items()['purchase']
+		bringItems = self.bring().get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']
 		added = list()
 		exist = list()
 		for item in items:
 			if not any(entr['name'].lower() == item.lower() for entr in bringItems):
-				self.bring().purchase_item(item, "")
+				self.bring().purchase_item(BringApi.translateToCH(item, self.LanguageManager.activeLanguageAndCountryCode), "")
 				added.append(item)
 			else:
 				exist.append(item)
@@ -118,13 +118,13 @@ class BringShoppingList(AliceSkill):
 		internal method to delete a list of items from the shopping list
 		:returns: two splitted lists of successfull deletions and items that were not on the list
 		"""
-		bringItems = self.bring().get_items()['purchase']
+		bringItems = self.bring().get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']
 		removed = list()
 		exist = list()
 		for item in items:
 			for entr in bringItems:
 				if entr['name'].lower() == item.lower():
-					self.bring().recent_item(entr['name'])
+					self.bring().recent_item(BringApi.translateToCH(entr['name'], self.LanguageManager.activeLanguageAndCountryCode))
 					removed.append(item)
 					break
 			else:
@@ -137,7 +137,7 @@ class BringShoppingList(AliceSkill):
 		internal method to check if a list of items is on the shopping list
 		:returns: two splitted lists, one with the items on the list, one with the missing ones
 		"""
-		bringItems = self.bring().get_items()['purchase']
+		bringItems = self.bring().get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']
 		found = list()
 		missing = list()
 		for item in items:
