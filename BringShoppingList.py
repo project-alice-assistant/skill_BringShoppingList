@@ -6,7 +6,7 @@ from core.ProjectAliceExceptions import SkillStartingFailed
 from core.base.model.Intent import Intent
 from core.base.model.AliceSkill import AliceSkill
 from core.dialog.model.DialogSession import DialogSession
-from core.util.Decorators import AnyExcept, Online
+from core.util.Decorators import AnyExcept, Online, IntentHandler
 
 
 class BringShoppingList(AliceSkill):
@@ -15,47 +15,8 @@ class BringShoppingList(AliceSkill):
 	Description: maintaines a Bring! shopping list
 	"""
 
-	### Intents
-	_INTENT_ADD_ITEM = Intent('addItem_bringshop')
-	_INTENT_DEL_ITEM = Intent('deleteItem_bringshop')
-	_INTENT_READ_LIST = Intent('readList_bringshop')
-	_INTENT_CHECK_LIST = Intent('checkList_bringshop', isProtected=True)
-	_INTENT_DEL_LIST = Intent('deleteList_bringshop')
-	_INTENT_CONF_DEL = Intent('AnswerYesOrNo', isProtected=True)
-	_INTENT_ANSWER_SHOP = Intent('whatItem_bringshop', isProtected=True)
-	_INTENT_SPELL_WORD = Intent('SpellWord', isProtected=True)
-
-
 	def __init__(self):
-		self._INTENTS = [
-			(self._INTENT_ADD_ITEM, self.addItemIntent),
-			(self._INTENT_DEL_ITEM, self.delItemIntent),
-			(self._INTENT_CHECK_LIST, self.checkListIntent),
-			(self._INTENT_READ_LIST, self.readListIntent),
-			(self._INTENT_DEL_LIST, self.delListIntent),
-			self._INTENT_CONF_DEL,
-			self._INTENT_ANSWER_SHOP,
-			self._INTENT_SPELL_WORD
-		]
-
-		super().__init__(self._INTENTS)
-
-		self._INTENT_ANSWER_SHOP.dialogMapping = {
-			self._INTENT_ADD_ITEM: self.addItemIntent,
-			self._INTENT_DEL_ITEM: self.delItemIntent,
-			self._INTENT_CHECK_LIST: self.checkListIntent
-		}
-
-		self._INTENT_SPELL_WORD.dialogMapping = {
-			self._INTENT_ADD_ITEM: self.addItemIntent,
-			self._INTENT_DEL_ITEM: self.delItemIntent,
-			self._INTENT_CHECK_LIST: self.checkListIntent
-		}
-
-		self._INTENT_CONF_DEL.dialogMapping = {
-			'confDelList': self.confDelIntent
-		}
-
+		super().__init__()
 		self._uuid = self.getConfig('uuid')
 		self._uuidlist = self.getConfig('listUuid')
 		self._bring = None
@@ -99,7 +60,7 @@ class BringShoppingList(AliceSkill):
 	def _addItemInt(self, items) -> Tuple[list, list]:
 		"""
 		internal method to add a list of items to the shopping list
-		:returns: two splitted lists of successfull adds and items that already existed.
+		:returns: two splitted lists of successful adds and items that already existed.
 		"""
 		bringItems = self.bring().get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']
 		added = list()
@@ -116,7 +77,7 @@ class BringShoppingList(AliceSkill):
 	def _deleteItemInt(self, items: list) -> Tuple[list, list]:
 		"""
 		internal method to delete a list of items from the shopping list
-		:returns: two splitted lists of successfull deletions and items that were not on the list
+		:returns: two splitted lists of successful deletions and items that were not on the list
 		"""
 		bringItems = self.bring().get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']
 		removed = list()
@@ -151,7 +112,7 @@ class BringShoppingList(AliceSkill):
 	def _getShopItems(self, answer: str, session: DialogSession) -> list:
 		"""get the values of shopItem as a list of strings"""
 		intent = session.intentName
-		if intent == self._INTENT_SPELL_WORD:
+		if intent == Intent('SpellWord'):
 			item = ''.join([slot.value['value'] for slot in session.slotsAsObjects['Letters']])
 			return [item.capitalize()]
 
@@ -161,22 +122,25 @@ class BringShoppingList(AliceSkill):
 			self.continueDialog(
 				sessionId=session.sessionId,
 				text=self.randomTalk(f'{answer}_what'),
-				intentFilter=[self._INTENT_ANSWER_SHOP, self._INTENT_SPELL_WORD],
-				currentDialogState=intent)
+				intentFilter=[Intent('whatItem_bringshop'), Intent('SpellWord')],
+				currentDialogState=intent.split(':')[-1])
 		return items
 
 
 	### INTENTS ###
+	@IntentHandler('deleteList_bringshop')
+	@Online
 	def delListIntent(self, session: DialogSession):
 		self.continueDialog(
 			sessionId=session.sessionId,
 			text=self.randomTalk('chk_del_all'),
-			intentFilter=[self._INTENT_CONF_DEL],
-			currentDialogState='confDelList')
+			intentFilter=[Intent('AnswerYesOrNo')],
+			currentDialogState='confDelList_Bring')
 
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
+	@IntentHandler('AnswerYesOrNo', requiredState='confDelList_Bring', isProtected=True)
 	def confDelIntent(self, session: DialogSession):
 		if self.Commons.isYes(session):
 			self._deleteCompleteList()
@@ -187,6 +151,9 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
+	@IntentHandler('addItem_bringshop')
+	@IntentHandler('whatItem_bringshop', requiredState='addItem_bringshop', isProtected=True)
+	@IntentHandler('SpellWord', requiredState='addItem_bringshop', isProtected=True)
 	def addItemIntent(self, session: DialogSession):
 		items = self._getShopItems('add', session)
 		if items:
@@ -196,6 +163,9 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
+	@IntentHandler('deleteItem_bringshop')
+	@IntentHandler('whatItem_bringshop', requiredState='deleteItem_bringshop', isProtected=True)
+	@IntentHandler('SpellWord', requiredState='deleteItem_bringshop', isProtected=True)
 	def delItemIntent(self, session: DialogSession):
 		items = self._getShopItems('rem', session)
 		if items:
@@ -205,6 +175,9 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
+	@IntentHandler('checkList_bringshop', isProtected=True)
+	@IntentHandler('whatItem_bringshop', requiredState='checkList_bringshop', isProtected=True)
+	@IntentHandler('SpellWord', requiredState='checkList_bringshop', isProtected=True)
 	def checkListIntent(self, session: DialogSession):
 		items = self._getShopItems('chk', session)
 		if items:
@@ -214,6 +187,7 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
+	@IntentHandler('readList_bringshop')
 	def readListIntent(self, session: DialogSession):
 		"""read the content of the list"""
 		items = self.bring().get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']
