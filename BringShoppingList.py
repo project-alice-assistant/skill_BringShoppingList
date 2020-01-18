@@ -25,7 +25,6 @@ class BringShoppingList(AliceSkill):
 	def onStart(self):
 		super().onStart()
 		self._connectAccount()
-		return self.supportedIntents
 
 
 	def bring(self):
