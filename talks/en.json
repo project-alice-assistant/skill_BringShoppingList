@@ -23,11 +23,11 @@
 	},
 	"read_multi": {
 		"default": [
-			"There is {} and {} on your shopping list",
-			"{} and {} are on your shopping list"
+			"There is {} on your shopping list",
+			"{} are on your shopping list"
 		],
 		"short": [
-			"{} and {}"
+			"{}"
 		]
 	},
 	"read_none": {
@@ -54,13 +54,13 @@
 	},
 	"add_multi": {
 		"default": [
-			"Ok, I'll write {} and {} to the shopping list",
-			"I added {} and {} to your shopping list",
-			"{} and {} were added to your shopping list",
-			"I'll add the following to your shopping list: {} and {}"
+			"Ok, I'll write {} to the shopping list",
+			"I added {} to your shopping list",
+			"{} were added to your shopping list",
+			"I'll add the following to your shopping list: {}"
 		],
 		"short": [
-			"Added {} and {}"
+			"Added {}"
 		]
 	},
 	"add_f_one": {
@@ -74,12 +74,12 @@
 	},
 	"add_f_multi": {
 		"default": [
-			"{} and {} are already on the list",
-			"{} and {} were already on the shopping list",
-			"{} and {} have been on your shopping list"
+			"{} are already on the list",
+			"{} were already on the shopping list",
+			"{} have been on your shopping list"
 		],
 		"short": [
-			"{} and {} are already there"
+			"{} are already there"
 		]
 	},
 	"add_what": {
@@ -103,11 +103,11 @@
 	},
 	"rem_multi": {
 		"default": [
-			"Ok, {} and {} have been removed from your shopping list",
-			"{} as well as {} are deleted from the shopping list"
+			"Ok, {} have been removed from your shopping list",
+			"{} are deleted from the shopping list"
 		],
 		"short": [
-			"deleted {} and {}"
+			"deleted {}"
 		]
 	},
 	"rem_f_one": {
@@ -121,10 +121,10 @@
 	},
 	"rem_f_multi": {
 		"default": [
-			"{} and {} were not on your shopping list."
+			"{} were not on your shopping list."
 		],
 		"short": [
-			"{} and {} were not on the list"
+			"{} were not on the list"
 		]
 	},
 	"rem_what": {
@@ -148,11 +148,11 @@
 	},
 	"chk_multi": {
 		"default": [
-			"{} and {} is on the shopping list",
-			"{} and {} are on your shopping list"
+			"{} is on the shopping list",
+			"{} are on your shopping list"
 		],
 		"short": [
-			"found {} and {}"
+			"found {}"
 		]
 	},
 	"chk_f_one": {
@@ -166,11 +166,11 @@
 	},
 	"chk_f_multi": {
 		"default": [
-			"{} and {} are not on your shopping list",
-			"I could not find {} and {} on your shopping list"
+			"{} are not on your shopping list",
+			"I could not find {} on your shopping list"
 		],
 		"short": [
-			"Couldn't find {} and {}"
+			"Couldn't find {}"
 		]
 	},
 	"chk_what": {
