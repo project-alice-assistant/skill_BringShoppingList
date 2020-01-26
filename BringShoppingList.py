@@ -1,5 +1,6 @@
 from typing import Tuple
 
+
 from BringApi.BringApi import BringApi
 
 from core.ProjectAliceExceptions import SkillStartingFailed
