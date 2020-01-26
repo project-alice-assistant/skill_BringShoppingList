@@ -9280,7 +9280,7 @@
 				"Did I already add {Coke:=>shopItem} {Coke:=>shopItem} and {Bread:=>shopItem} to my shopping list?",
 				"Is {Bread:=>shopItem} on my grocery list?",
 				"Is {Bread:=>shopItem} and {Bread:=>shopItem} on my grocery list?",
-				"Is {Bread:=>shopItem} {Coke:=>shopItem} and {Bread:=>shopItem}on my grocery list?",
+				"Is {Bread:=>shopItem} {Coke:=>shopItem} and {Bread:=>shopItem} on my grocery list?",
 				"Do I have {Bananas:=>shopItem} on my grocery list?",
 				"Do I have {Bananas:=>shopItem} and {Bread:=>shopItem} on my grocery list?",
 				"Do I have {Bananas:=>shopItem} {Coke:=>shopItem} and {Bread:=>shopItem} on my grocery list?",
