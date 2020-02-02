@@ -12,10 +12,10 @@ wget http://skills.projectalice.ch/BringShoppingList -O ~/ProjectAlice/system/sk
 ### Description
 View and edit your Bring! Shopping list
 
-- Version: 1.0.15
+- Version: 1.0.16
 - Author: philipp2310
 - Maintainers: maxbachmann, Psychokiller1888
-- Alice minimum Version: 1.0.0-a4
+- Alice minimum Version: 1.0.0-a5
 - Conditions:
   - en
   - de
