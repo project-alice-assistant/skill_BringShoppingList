@@ -2,13 +2,6 @@
 
 [![Continous Integration](https://gitlab.com/project-alice-assistant/skills/skill_BringShoppingList/badges/master/pipeline.svg)](https://gitlab.com/project-alice-assistant/skills/skill_BringShoppingList/pipelines/latest)
 
-### Download
-
-##### > WGET method
-```bash
-wget http://skills.projectalice.ch/BringShoppingList -O ~/ProjectAlice/system/skillInstallTickets/BringShoppingList.install
-```
-
 ### Description
 View and edit your Bring! Shopping list
 
