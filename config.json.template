@@ -2,26 +2,26 @@
 	"bringEmail": {
 		"defaultValue": "",
 		"dataType": "email",
-		"isSensitve": false,
+		"isSensitive": false,
 		"description": "Bring email"
 	},
 	"bringPassword": {
 		"defaultValue": "",
 		"dataType": "string",
-		"isSensitve": true,
+		"isSensitive": true,
 		"description": "Bring password"
 	},
 	"uuid": {
 		"defaultValue": "",
 		"dataType": "string",
-		"isSensitve": false,
+		"isSensitive": false,
 		"description": "Bring user uuid",
 		"display": "hidden"
 	},
 	"listUuid": {
 		"defaultValue": "",
 		"dataType": "string",
-		"isSensitve": false,
+		"isSensitive": false,
 		"description": "Bring list uuid",
 		"display": "hidden"
 	}
