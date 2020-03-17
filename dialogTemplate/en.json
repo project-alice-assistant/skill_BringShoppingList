@@ -9217,8 +9217,8 @@
 				"delete {Bread:=>shopItem} from my shopping list",
 				"delete {Bread:=>shopItem} and {Bread:=>shopItem} from my shopping list",
 				"delete {Bread:=>shopItem} {Bread:=>shopItem} and {Bread:=>shopItem} from my shopping list",
-				"there's no more need for {Bread:=>shopItem} on my shopping list"
-				"there's no more need for {Bread:=>shopItem} and {Bread:=>shopItem} on my shopping list"
+				"there's no more need for {Bread:=>shopItem} on my shopping list",
+				"there's no more need for {Bread:=>shopItem} and {Bread:=>shopItem} on my shopping list",
 				"there's no more need for {Bread:=>shopItem} {Bread:=>shopItem} and {Bread:=>shopItem} on my shopping list",
 				"Please remove {Bread:=>shopItem} from my grocery list",
 				"Please remove {Bread:=>shopItem} and {Bread:=>shopItem} from my grocery list",
@@ -9229,8 +9229,8 @@
 				"delete {Bread:=>shopItem} from my grocery list",
 				"delete {Bread:=>shopItem} and {Bread:=>shopItem} from my grocery list",
 				"delete {Bread:=>shopItem} {Bread:=>shopItem} and {Bread:=>shopItem} from my grocery list",
-				"there's no more need for {Bread:=>shopItem} on my grocery list"
-				"there's no more need for {Bread:=>shopItem} and {Bread:=>shopItem} on my grocery list"
+				"there's no more need for {Bread:=>shopItem} on my grocery list",
+				"there's no more need for {Bread:=>shopItem} and {Bread:=>shopItem} on my grocery list",
 				"there's no more need for {Bread:=>shopItem} {Bread:=>shopItem} and {Bread:=>shopItem} on my grocery list",
 				"Please take {Bread:=>shopItem} from my shopping list",
 				"Would you please remove {Bread:=>shopItem} from my grocery list",
