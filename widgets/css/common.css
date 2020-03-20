@@ -22,8 +22,17 @@
 	min-height: 50px;
 }
 
+.bringItemIcon {
+	height: 40px;
+}
+
 .BringShoppingList_list_item {
-	color: #d1d1d1;
-	font-size: 1em;
-	margin-top: 8px;
+	width: 75px;
+    color: #d1d1d1;
+    background: lightslategray;
+    font-size: 1em;
+    margin: 4px;
+    float: left;
+    text-align: center;
+    padding: 5px;
 }

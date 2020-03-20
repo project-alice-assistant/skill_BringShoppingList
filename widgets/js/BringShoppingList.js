@@ -15,7 +15,19 @@
 		}).done(function(answer) {
 			listItems = "";
 			$.each(answer, function (i, val) {
-				listItems += '<li class="BringShoppingList_list_item"><span class="fa-li"><i class="fas fa-caret-right"></i></span>' + val + '</li>';
+				listItems += '<div class="BringShoppingList_list_item">' +
+								'<img class="bringItemIcon" src="https://web.getbring.com/assets/images/items/'+val.toLowerCase().replace({
+                    "\\s": "_",
+                    " ": "_",
+                    "-": "_",
+                    "!": "",
+                    "\xe4": "ae",
+                    "\xf6": "oe",
+                    "\xfc": "ue",
+                    "\xe9": "e"
+                })+'.png" ' +
+								'onError="this.onerror=null;this.src=\'https://web.getbring.com/assets/images/items/'+val[0].toLowerCase()+'.png\';" /><br/>' +
+								val + '</div>';
 			});
 			$('#BringShoppingList_list').html( listItems );
 		});
