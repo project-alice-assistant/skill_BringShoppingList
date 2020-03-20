@@ -23,16 +23,28 @@
 }
 
 .bringItemIcon {
-	height: 40px;
+	max-height: 55px;
+	max-width: 60px;
+	margin-top: auto;
+	margin-bottom: auto;
+	vertical-align: middle;
+}
+.BringShoppingList_imgCont {
+	height: 75px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
 }
 
 .BringShoppingList_list_item {
-	width: 75px;
-    color: #d1d1d1;
-    background: lightslategray;
-    font-size: 1em;
-    margin: 4px;
-    float: left;
-    text-align: center;
-    padding: 5px;
+	width: 80px;
+	color: #d1d1d1;
+	background: lightslategray;
+	font-size: 1em;
+	margin: 2px;
+	float: left;
+	text-align: center;
+	padding: 5px;
+	overflow: hidden;
+	font-size: 1em;
 }

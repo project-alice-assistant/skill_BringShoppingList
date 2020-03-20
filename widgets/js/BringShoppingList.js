@@ -1,5 +1,26 @@
 (function () {
-
+	function getIconName(val){
+		let fileName = val.toLowerCase();
+		repl = {
+                    "\\s": "_",
+                    " ": "_",
+                    "-": "_",
+                    "!": "",
+                    "\xe4": "ae",
+                    "ä": "ae",
+                    "\xf6": "oe",
+                    "ö": "oe",
+                    "\xfc": "ue",
+					"ü": "ue",
+                    "\xe9": "e"
+                };
+		n = new RegExp(Object.keys(repl).join("|"),"gi");
+		fileName = fileName.replace(n, function(t) {
+                    return repl[t.toLowerCase()]
+                })
+		console.log(fileName);
+		return fileName+'.png'
+	}
 	function refresh() {
 		$.ajax({
 		url: '/home/widget/',
@@ -16,17 +37,8 @@
 			listItems = "";
 			$.each(answer, function (i, val) {
 				listItems += '<div class="BringShoppingList_list_item">' +
-								'<img class="bringItemIcon" src="https://web.getbring.com/assets/images/items/'+val.toLowerCase().replace({
-                    "\\s": "_",
-                    " ": "_",
-                    "-": "_",
-                    "!": "",
-                    "\xe4": "ae",
-                    "\xf6": "oe",
-                    "\xfc": "ue",
-                    "\xe9": "e"
-                })+'.png" ' +
-								'onError="this.onerror=null;this.src=\'https://web.getbring.com/assets/images/items/'+val[0].toLowerCase()+'.png\';" /><br/>' +
+								'<div class="BringShoppingList_imgCont"></div><img class="bringItemIcon" src="https://web.getbring.com/assets/images/items/'+getIconName(val)+
+								'" onError="this.onerror=null;this.src=\'https://web.getbring.com/assets/images/items/'+val[0].toLowerCase()+'.png\';" /><br/>' +
 								val + '</div>';
 			});
 			$('#BringShoppingList_list').html( listItems );
