@@ -24,7 +24,7 @@ class BringShoppingList(Widget):
 
 		items = bringList.get_items()['purchase']
 		details = bringList.get_items_detail()
-		itemList = [{"text": translate(item['name'], translation), "image": get_image(details, item['name'])} for item in items]
+		itemList = [{"text": self.translate(item['name'], translation), "image": self.get_image(details, item['name'])} for item in items]
 
 		return json.dumps(itemList)
 
