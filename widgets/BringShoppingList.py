@@ -18,8 +18,21 @@ class BringShoppingList(Widget):
 	def getList(self) -> list:
 		_uuid = self.skillInstance.getConfig('uuid')
 		_uuidlist = self.skillInstance.getConfig('listUuid')
+		_BringList = BringApi(_uuid, _uuidlist)
+		_transl = BringApi.loadTranslations(self.LanguageManager.activeLanguageAndCountryCode)
 
-		items = BringApi(_uuid, _uuidlist).get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']
-		itemlist = [item['name'] for item in items]
+		items = _BringList.get_items()['purchase']
+		details = _BringList.get_items_detail()
+		itemlist = [{"text": self.translate(item['name'], _transl), "image": self.get_image(details, item['name'])} for item in items]
 
 		return json.dumps(itemlist)
+
+	# return list with icons
+	def get_image(self, details, item: str):
+		for det in details:
+			if det["itemId"] == item and det['userIconItemId']:
+				return det['userIconItemId']
+		return item
+
+	def translate(self, item, transl):
+		return transl.get(item) or item
