@@ -27,12 +27,14 @@ class BringShoppingList(Widget):
 
 		return json.dumps(itemlist)
 
+
 	# return list with icons
 	def get_image(self, details, item: str):
 		for det in details:
 			if det["itemId"] == item and det['userIconItemId']:
 				return det['userIconItemId']
 		return item
+
 
 	def translate(self, item, transl):
 		return transl.get(item) or item
