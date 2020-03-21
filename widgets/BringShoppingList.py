@@ -6,35 +6,37 @@ from core.base.model.widgetSizes import WidgetSizes
 from BringApi.BringApi import BringApi
 import json
 
-class BringShoppingList(Widget):
 
+class BringShoppingList(Widget):
 	SIZE = WidgetSizes.w_large_tall
 	OPTIONS: dict = dict()
+
 
 	def __init__(self, data: sqlite3.Row):
 		super().__init__(data)
 
 
-	def getList(self) -> list:
-		_uuid = self.skillInstance.getConfig('uuid')
-		_uuidlist = self.skillInstance.getConfig('listUuid')
-		_BringList = BringApi(_uuid, _uuidlist)
-		_transl = BringApi.loadTranslations(self.LanguageManager.activeLanguageAndCountryCode)
+	def getList(self) -> str:
+		uuid = self.skillInstance.getConfig('uuid')
+		uuidList = self.skillInstance.getConfig('listUuid')
+		bringList = BringApi(uuid, uuidList)
+		translation = BringApi.loadTranslations(self.LanguageManager.activeLanguageAndCountryCode)
 
-		items = _BringList.get_items()['purchase']
-		details = _BringList.get_items_detail()
-		itemlist = [{"text": self.translate(item['name'], _transl), "image": self.get_image(details, item['name'])} for item in items]
+		items = bringList.get_items()['purchase']
+		details = bringList.get_items_detail()
+		itemList = [{"text": translate(item['name'], translation), "image": get_image(details, item['name'])} for item in items]
 
-		return json.dumps(itemlist)
+		return json.dumps(itemList)
 
 
-	# return list with icons
-	def get_image(self, details, item: str):
+	@staticmethod
+	def get_image(details, item: str) -> str:
 		for det in details:
 			if det["itemId"] == item and det['userIconItemId']:
 				return det['userIconItemId']
 		return item
 
 
-	def translate(self, item, transl):
+	@staticmethod
+	def translate(item, transl):
 		return transl.get(item) or item
