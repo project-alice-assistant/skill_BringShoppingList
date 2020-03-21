@@ -1,4 +1,5 @@
 (function () {
+
 	function getIconName(val){
 		let fileName = val.toLowerCase();
 		repl = {
@@ -21,6 +22,8 @@
 		console.log(fileName);
 		return fileName+'.png'
 	}
+
+
 	function refresh() {
 		$.ajax({
 		url: '/home/widget/',
@@ -45,7 +48,8 @@
 			$('#BringShoppingList_list').html( listItems );
 		});
 	}
+
 	refresh();
-	setInterval(function() {refresh()}, 1000*6000);
+	setInterval(function() {refresh()}, 1000*60);
 
 })();
