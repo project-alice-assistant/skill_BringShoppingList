@@ -6778,7 +6778,7 @@
 			"description": "Füge etwas zu deiner Einkaufsliste hinzu",
 			"enabledByDefault": true,
 			"utterances": [
-				"Schreibe etwas auf meine Einkaufsliste",
+				"Schreibe etwas auf meine Einkaufsliste.",
 				"Schreibe bitte etwas auf meine Einkaufsliste",
 				"Bitte füge etwas auf meiner Einkaufsliste ein",
 				"Setze bitte etwas neues auf meine Einkaufsliste",
