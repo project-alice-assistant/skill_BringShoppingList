@@ -19,7 +19,6 @@
 		fileName = fileName.replace(n, function(t) {
                     return repl[t.toLowerCase()]
                 })
-		console.log(fileName);
 		return fileName+'.png'
 	}
 
