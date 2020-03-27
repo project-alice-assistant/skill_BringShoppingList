@@ -127,7 +127,7 @@ class BringShoppingList(AliceSkill):
 
 
 	### INTENTS ###
-	@IntentHandler('deleteList_bringshop')
+	@IntentHandler('Bring_deleteList')
 	@Online
 	def delListIntent(self, session: DialogSession):
 		self.continueDialog(
@@ -150,8 +150,8 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('addItem_bringshop')
-	@IntentHandler('whatItem_bringshop', requiredState='addItem_bringshop', isProtected=True)
+	@IntentHandler('Bring_addItem')
+	@IntentHandler('Bring_whatItem', requiredState='addItem_bringshop', isProtected=True)
 	@IntentHandler('SpellWord', requiredState='addItem_bringshop', isProtected=True)
 	def addItemIntent(self, session: DialogSession):
 		items = self._getShopItems('add', session)
@@ -162,8 +162,8 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('deleteItem_bringshop')
-	@IntentHandler('whatItem_bringshop', requiredState='deleteItem_bringshop', isProtected=True)
+	@IntentHandler('Bring_deleteItem')
+	@IntentHandler('Bring_whatItem', requiredState='deleteItem_bringshop', isProtected=True)
 	@IntentHandler('SpellWord', requiredState='deleteItem_bringshop', isProtected=True)
 	def delItemIntent(self, session: DialogSession):
 		items = self._getShopItems('rem', session)
@@ -174,8 +174,8 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('checkList_bringshop', isProtected=True)
-	@IntentHandler('whatItem_bringshop', requiredState='checkList_bringshop', isProtected=True)
+	@IntentHandler('Bring_checkList', isProtected=True)
+	@IntentHandler('Bring_whatItem', requiredState='checkList_bringshop', isProtected=True)
 	@IntentHandler('SpellWord', requiredState='checkList_bringshop', isProtected=True)
 	def checkListIntent(self, session: DialogSession):
 		items = self._getShopItems('chk', session)
@@ -186,7 +186,7 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('readList_bringshop')
+	@IntentHandler('Bring_readList')
 	def readListIntent(self, session: DialogSession):
 		"""read the content of the list"""
 		items = self.bring().get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']

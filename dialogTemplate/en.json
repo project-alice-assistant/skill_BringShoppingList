@@ -9135,7 +9135,7 @@
 	],
 	"intents": [
 		{
-			"name": "addItem_bringshop",
+			"name": "Bring_AddItem",
 			"description": "Add something to the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
@@ -9185,13 +9185,17 @@
 			]
 		},
 		{
-			"name": "whatItem_bringshop",
+			"name": "Bring_WhatItem",
 			"description": "specify what item should be added/removed/check from the list",
 			"enabledByDefault": false,
 			"utterances": [
 				"{Bread:=>shopItem}",
+				"{Bread:=>shopItem} please",
 				"{Bread:=>shopItem} and {Bread:=>shopItem}",
-				"{Bread:=>shopItem} {Banana:=>shopItem} {Water:=>shopItem}"
+				"{Bread:=>shopItem} and {Bread:=>shopItem} please",
+				"{Bread:=>shopItem} {Banana:=>shopItem} {Water:=>shopItem}",
+				"{Bread:=>shopItem} {Banana:=>shopItem} and {Water:=>shopItem}",
+				"{Bread:=>shopItem} {Banana:=>shopItem} and {Water:=>shopItem} please"
 			],
 			"slots": [
 				{
@@ -9204,7 +9208,7 @@
 			]
 		},
 		{
-			"name": "deleteItem_bringshop",
+			"name": "Bring_deleteItem",
 			"description": "Delete something from the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
@@ -9253,19 +9257,28 @@
 			]
 		},
 		{
-			"name": "readList_bringshop",
+			"name": "Bring_readList",
 			"description": "Read the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
 				"what is written on my shopping list?",
 				"what's on my shopping list?",
 				"please tell me what I have on my shopping list",
-				"can you tell me what's on my shopping list"
+				"can you tell me what's on my shopping list",
+				"can you tell me what's on my shopping list please",
+				"tell me what's on my shopping list",
+				"tell me what's on my shopping list please",
+				"what do i have on my shopping list",
+				"say what's on my shopping list",
+				"say what's on my shopping list please",
+				"please say what's on my shopping list",
+				"what do i have on my shopping list",
+				"what do i have to shop"
 			],
 			"slots": []
 		},
 		{
-			"name": "checkList_bringshop",
+			"name": "Bring_checkList",
 			"description": "Check if an Item is on the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
@@ -9308,14 +9321,26 @@
 			]
 		},
 		{
-			"name": "deleteList_bringshop",
+			"name": "Bring_deleteList",
 			"description": "delete the complete shopping list",
 			"enabledByDefault": true,
 			"utterances": [
-				"Please delete the complete shopping list",
+				"please delete the complete shopping list",
 				"delete my shopping list",
 				"drop the complete shopping list would you",
-				"remove everything on my shopping list please"
+				"remove everything on my shopping list please",
+				"can you please delete my shopping list",
+				"can you please my shopping list",
+				"can you please my entire shopping list",
+				"can you please my complete shopping list",
+				"get rid of my shopping list",
+				"get rid of my shopping list please",
+				"restart my shopping list",
+				"please restart my shopping list",
+				"restart my shopping list please",
+				"start anew with my shopping list",
+				"start anew with my shopping list please",
+				"pleasestart anew with my shopping list please"
 			],
 			"slots": []
 		}

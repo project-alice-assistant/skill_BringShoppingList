@@ -6774,7 +6774,7 @@
 	],
 	"intents": [
 		{
-			"name": "addItem_bringshop",
+			"name": "Bring_addItem",
 			"description": "Füge etwas zu deiner Einkaufsliste hinzu",
 			"enabledByDefault": true,
 			"utterances": [
@@ -7024,7 +7024,7 @@
 			]
 		},
 		{
-			"name": "readList_bringshop",
+			"name": "Bring_readList",
 			"description": "Liest die Einkaufsliste vor",
 			"enabledByDefault": true,
 			"utterances": [
@@ -7060,7 +7060,7 @@
 			"slots": []
 		},
 		{
-			"name": "checkList_bringshop",
+			"name": "Bring_checkList",
 			"description": "Prüfe ob ein Gegenstand auf der Einkaufsliste steht",
 			"enabledByDefault": true,
 			"utterances": [
@@ -7087,7 +7087,7 @@
 			]
 		},
 		{
-			"name": "deleteList_bringshop",
+			"name": "Bring_deleteList",
 			"description": "Lösche die Einkaufsliste",
 			"enabledByDefault": true,
 			"utterances": [
