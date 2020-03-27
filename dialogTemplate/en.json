@@ -9135,7 +9135,7 @@
 	],
 	"intents": [
 		{
-			"name": "Bring_AddItem",
+			"name": "Bring_addItem",
 			"description": "Add something to the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
@@ -9185,7 +9185,7 @@
 			]
 		},
 		{
-			"name": "Bring_WhatItem",
+			"name": "Bring_whatItem",
 			"description": "specify what item should be added/removed/check from the list",
 			"enabledByDefault": false,
 			"utterances": [
@@ -9272,7 +9272,9 @@
 				"say what's on my shopping list",
 				"say what's on my shopping list please",
 				"please say what's on my shopping list",
-				"what do i have on my shopping list",
+				"please tell me what I have on my shopping list",
+				"tell me what I have on my shopping list",
+				"tell me what I have on my shopping list please",
 				"what do i have to shop"
 			],
 			"slots": []

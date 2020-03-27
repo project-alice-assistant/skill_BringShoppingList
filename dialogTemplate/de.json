@@ -6949,7 +6949,7 @@
 			]
 		},
 		{
-			"name": "whatItem_bringshop",
+			"name": "Bring_whatItem",
 			"description": "Spezifiziere welcher Gegenstand bearbeitet werden soll",
 			"enabledByDefault": false,
 			"utterances": [
@@ -6967,7 +6967,7 @@
 			]
 		},
 		{
-			"name": "deleteItem_bringshop",
+			"name": "Bring_deleteItem",
 			"description": "Lösche etwas von der Einkaufsliste",
 			"enabledByDefault": true,
 			"utterances": [
