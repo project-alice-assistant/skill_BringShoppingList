@@ -43,7 +43,7 @@ class BringShoppingList(AliceSkill):
 		try:
 			self._bring = self.bring()
 		except BringApi.AuthentificationFailed:
-			raise SkillStartingFailed(self._name, 'Please check your account login and password')
+			raise SkillStartingFailed(skillName=self._name, error='Please check your account login and password')
 
 
 	def _deleteCompleteList(self):
