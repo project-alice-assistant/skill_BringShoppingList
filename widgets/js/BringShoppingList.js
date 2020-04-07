@@ -8,11 +8,8 @@
 			"-": "_",
 			"!": "",
 			"\xe4": "ae",
-			"ä": "ae",
 			"\xf6": "oe",
-			"ö": "oe",
 			"\xfc": "ue",
-			"ü": "ue",
 			"\xe9": "e"
 		};
 		let n = new RegExp(Object.keys(repl).join("|"), "gi");
@@ -38,9 +35,9 @@
 		}).done(function (answer) {
 			let listItems = "";
 			$.each(answer, function (i, val) {
-				listItems += '<div class="BringShoppingList_list_item">' +
-					'<div class="BringShoppingList_imgCont"></div>' +
-					'<img class="bringItemIcon" src="https://web.getbring.com/assets/images/items/' + getIconName(val['image']) +
+				listItems += '<div class="tile">' +
+					'<div class="BringShoppingTile_imgCont"></div>' +
+					'<img class="BringShoppingItemIcon" src="https://web.getbring.com/assets/images/items/' + getIconName(val['image']) +
 					'" onerror="this.onerror=null; this.src=\'https://web.getbring.com/assets/images/items/' + val['image'][0].toLowerCase() + '.png\';" /><br/>' +
 					val['text'] + '</div>';
 			});
