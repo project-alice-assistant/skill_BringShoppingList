@@ -121,7 +121,7 @@ class BringShoppingList(AliceSkill):
 			self.continueDialog(
 				sessionId=session.sessionId,
 				text=self.randomTalk(f'{answer}_what'),
-				intentFilter=[Intent('whatItem_bringshop'), Intent('SpellWord')],
+				intentFilter=[Intent('Bring_whatItem'), Intent('SpellWord')],
 				currentDialogState=intent.split(':')[-1])
 		return items
 
