@@ -8,8 +8,8 @@ import json
 
 
 class BringShoppingList(Widget):
-	SIZE = WidgetSizes.w_large_tall
-	OPTIONS: dict = dict()
+	DEFAULT_SIZE = WidgetSizes.w_large_tall
+	DEFAULT_OPTIONS: dict = dict()
 
 
 	def __init__(self, data: sqlite3.Row):
