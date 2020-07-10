@@ -33,6 +33,10 @@
 			dataType: 'json',
 			type: 'POST'
 		}).done(function (answer) {
+			if ('success' in answer){
+				$('#BringShoppingList_list').html("<div class='BringWidgetError'>Bring! Shopping List - ERROR: " + answer['error'] + "</div>");
+				return;
+			}
 			let listItems = "";
 			$.each(answer, function (i, val) {
 				listItems += '<div class="tile">' +

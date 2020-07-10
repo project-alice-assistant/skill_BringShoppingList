@@ -1,7 +1,7 @@
 import sqlite3
 
 from core.base.model.Widget import Widget
-from core.base.model.widgetSizes import WidgetSizes
+from core.base.model.WidgetSizes import WidgetSizes
 
 from BringApi.BringApi import BringApi
 import json
@@ -17,16 +17,19 @@ class BringShoppingList(Widget):
 
 
 	def getList(self) -> str:
-		uuid = self.skillInstance.getConfig('uuid')
-		uuidList = self.skillInstance.getConfig('listUuid')
-		bringList = BringApi(uuid, uuidList)
-		translation = BringApi.loadTranslations(self.LanguageManager.activeLanguageAndCountryCode)
+		try:
+			uuid = self.skillInstance.getConfig('uuid')
+			uuidList = self.skillInstance.getConfig('listUuid')
+			bringList = BringApi(uuid, uuidList)
+			translation = BringApi.loadTranslations(self.LanguageManager.activeLanguageAndCountryCode)
 
-		items = bringList.get_items()['purchase']
-		details = bringList.get_items_detail()
-		itemList = [{"text": self.translate(item['name'], translation), "image": self.get_image(details, item['name'])} for item in items]
+			items = bringList.get_items()['purchase']
+			details = bringList.get_items_detail()
+			itemList = [{"text": self.translate(item['name'], translation), "image": self.get_image(details, item['name'])} for item in items]
 
-		return json.dumps(itemList)
+			return json.dumps(itemList)
+		except Exception as e:
+			return json.dumps({'success':False,'error':str(e)})
 
 
 	@staticmethod
