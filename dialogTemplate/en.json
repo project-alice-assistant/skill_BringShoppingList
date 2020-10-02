@@ -1,7 +1,5 @@
 {
 	"skill": "BringShoppingList",
-	"icon": "store",
-	"description": "Verwalte deine Bring! Einkaufsliste",
 	"slotTypes": [
 		{
 			"name": "buyable",
@@ -9136,7 +9134,6 @@
 	"intents": [
 		{
 			"name": "Bring_addItem",
-			"description": "Add something to the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
 				"Please add {Bread:=>shopItem} to my shopping list",
@@ -9186,7 +9183,6 @@
 		},
 		{
 			"name": "Bring_whatItem",
-			"description": "specify what item should be added/removed/check from the list",
 			"enabledByDefault": false,
 			"utterances": [
 				"{Bread:=>shopItem}",
@@ -9209,7 +9205,6 @@
 		},
 		{
 			"name": "Bring_deleteItem",
-			"description": "Delete something from the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
 				"Please remove {Bread:=>shopItem} from my shopping list",
@@ -9258,7 +9253,6 @@
 		},
 		{
 			"name": "Bring_readList",
-			"description": "Read the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
 				"what is written on my shopping list?",
@@ -9280,7 +9274,6 @@
 		},
 		{
 			"name": "Bring_checkList",
-			"description": "Check if an Item is on the shopping list",
 			"enabledByDefault": true,
 			"utterances": [
 				"Is {Bread:=>shopItem} on my shopping list?",
@@ -9323,7 +9316,6 @@
 		},
 		{
 			"name": "Bring_deleteList",
-			"description": "delete the complete shopping list",
 			"enabledByDefault": true,
 			"utterances": [
 				"please delete the complete shopping list",
