@@ -1,7 +1,7 @@
 {
 	"bringEmail": {
 		"defaultValue": "",
-		"dataType": "email",
+		"dataType": "string",
 		"isSensitive": false,
 		"description": "Bring email"
 	},

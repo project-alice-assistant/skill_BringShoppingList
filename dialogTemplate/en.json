@@ -9174,7 +9174,6 @@
 			"slots": [
 				{
 					"name": "shopItem",
-					"description": null,
 					"required": false,
 					"type": "buyable",
 					"missingQuestion": ""
@@ -9196,7 +9195,6 @@
 			"slots": [
 				{
 					"name": "shopItem",
-					"description": null,
 					"required": false,
 					"type": "buyable",
 					"missingQuestion": ""
@@ -9244,7 +9242,6 @@
 			"slots": [
 				{
 					"name": "shopItem",
-					"description": null,
 					"required": false,
 					"type": "buyable",
 					"missingQuestion": ""
@@ -9307,7 +9304,6 @@
 			"slots": [
 				{
 					"name": "shopItem",
-					"description": null,
 					"required": false,
 					"type": "buyable",
 					"missingQuestion": ""
