@@ -139,7 +139,7 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('AnswerYesOrNo', requiredState='confDelList_Bring', isProtected=True)
+	@IntentHandler('AnswerYesOrNo', requiredState='confDelList_Bring')
 	def confDelIntent(self, session: DialogSession):
 		if self.Commons.isYes(session):
 			self._deleteCompleteList()
@@ -151,8 +151,8 @@ class BringShoppingList(AliceSkill):
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
 	@IntentHandler('Bring_addItem')
-	@IntentHandler('Bring_whatItem', requiredState='Bring_addItem', isProtected=True)
-	@IntentHandler('SpellWord', requiredState='Bring_addItem', isProtected=True)
+	@IntentHandler('Bring_whatItem', requiredState='Bring_addItem')
+	@IntentHandler('SpellWord', requiredState='Bring_addItem')
 	def addItemIntent(self, session: DialogSession):
 		items = self._getShopItems('add', session)
 		if items:
@@ -163,8 +163,8 @@ class BringShoppingList(AliceSkill):
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
 	@IntentHandler('Bring_deleteItem')
-	@IntentHandler('Bring_whatItem', requiredState='Bring_deleteItem', isProtected=True)
-	@IntentHandler('SpellWord', requiredState='Bring_deleteItem', isProtected=True)
+	@IntentHandler('Bring_whatItem', requiredState='Bring_deleteItem')
+	@IntentHandler('SpellWord', requiredState='Bring_deleteItem')
 	def delItemIntent(self, session: DialogSession):
 		items = self._getShopItems('rem', session)
 		if items:
@@ -174,9 +174,9 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('Bring_checkList', isProtected=True)
-	@IntentHandler('Bring_whatItem', requiredState='Bring_checkList', isProtected=True)
-	@IntentHandler('SpellWord', requiredState='Bring_checkList', isProtected=True)
+	@IntentHandler('Bring_checkList')
+	@IntentHandler('Bring_whatItem', requiredState='Bring_checkList')
+	@IntentHandler('SpellWord', requiredState='Bring_checkList')
 	def checkListIntent(self, session: DialogSession):
 		items = self._getShopItems('chk', session)
 		if items:
