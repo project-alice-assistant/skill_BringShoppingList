@@ -1,7 +1,12 @@
 {
-    "Bring_addItem": [],
-    "Bring_deleteItem": [],
-    "Bring_readList": [],
-    "Bring_checkList": [],
-    "Bring_deleteList": []
+    "Bring_addItem": [
+		"add an item to my shopping list",
+		"remind me to buy",
+		"shopping list"
+	],
+    "Bring_readList": [
+		"what's on my shopping list",
+		"what do i need to buy",
+		"what do I have on my shopping list"
+	]
 }
