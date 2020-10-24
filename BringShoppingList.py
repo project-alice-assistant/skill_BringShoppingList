@@ -3,10 +3,10 @@ from typing import Tuple
 from BringApi.BringApi import BringApi
 
 from core.ProjectAliceExceptions import SkillStartingFailed
-from core.base.model.Intent import Intent
 from core.base.model.AliceSkill import AliceSkill
+from core.base.model.Intent import Intent
 from core.dialog.model.DialogSession import DialogSession
-from core.util.Decorators import AnyExcept, Online, IntentHandler
+from core.util.Decorators import AnyExcept, IntentHandler, Online
 
 
 class BringShoppingList(AliceSkill):
@@ -14,6 +14,7 @@ class BringShoppingList(AliceSkill):
 	Author: philipp2310
 	Description: maintaines a Bring! shopping list
 	"""
+
 
 	def __init__(self):
 		super().__init__()
@@ -115,14 +116,17 @@ class BringShoppingList(AliceSkill):
 			item = ''.join([slot.value['value'] for slot in session.slotsAsObjects['Letters']])
 			return [item.capitalize()]
 
-		items = [x.value['value'] for x in session.slotsAsObjects.get('shopItem', list()) if x.value['value'] != "unknownword"]
+		items = [x.value['value'] for x in session.slotsAsObjects.get('shopItem', list()) if x.value['value'] != 'unknownword']
 
 		if not items:
 			self.continueDialog(
 				sessionId=session.sessionId,
 				text=self.randomTalk(f'{answer}_what'),
-				intentFilter=[Intent('Bring_whatItem'), Intent('SpellWord')],
-				currentDialogState=intent.split(':')[-1].split('/')[-1])
+				intentFilter=[Intent('Bring_whatItem')],
+				currentDialogState=intent.split(':')[-1].split('/')[-1],
+				slot='buyable',
+				probabilityThreshold=0.1
+			)
 		return items
 
 
