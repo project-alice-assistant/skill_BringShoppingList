@@ -33,25 +33,45 @@
 			dataType: 'json',
 			type: 'POST'
 		}).done(function (answer) {
+			let $list = $('#BringShoppingList_list');
 			if ('success' in answer){
-				$('#BringShoppingList_list').html("<div class='BringWidgetError'>Bring! Shopping List - ERROR: " + answer['error'] + "</div>");
+				$list.html("<div class='BringWidgetError'>Bring! Shopping List - ERROR: " + answer['error'] + "</div>");
 				return;
 			}
-			let listItems = "";
-			$.each(answer, function (i, val) {
-				listItems += '<div class="tile">' +
-					'<div class="BringShoppingTile_imgCont"></div>' +
-					'<img class="BringShoppingItemIcon" src="https://web.getbring.com/assets/images/items/' + getIconName(val['image']) +
-					'" onerror="this.onerror=null; this.src=\'https://web.getbring.com/assets/images/items/' + val['image'][0].toLowerCase() + '.png\';" /><br/>' +
-					val['text'] + '</div>';
+
+			// Build a list of items that are on the list
+			let items = {};
+			$.each(answer, function (i, item) {
+				items[item['text']] = item;
 			});
-			$('#BringShoppingList_list').html(listItems);
+
+			// First remove what's gone from the list
+			$list.find('img').each(function() {
+				if (!($(this).attr('id') in items)) {
+					$(this).parent().remove();
+				}
+			});
+
+			// Then add what's new
+			for (const [itemName, item] of Object.entries(items)) {
+				if ($(`#${itemName}`).length === 0) {
+					$list.append(
+						$(`
+							<div class="tile">
+								<div class="BringShoppingTile_imgCont"></div>
+								<img alt="${itemName}" class="BringShoppingItemIcon" id="${itemName}" src="https://web.getbring.com/assets/images/items/${getIconName(item['image'])}" 
+								onerror="this.onerror=null; this.src='https://web.getbring.com/assets/images/items/${item['image'][0].toLowerCase()}.png';"/>
+								<br/>${itemName}</div>
+						`)
+					);
+				}
+			}
 		});
 	}
 
 	refresh();
 	setInterval(function () {
 		refresh()
-	}, 1000 * 20);
+	}, 1000 * 10);
 
 })();
