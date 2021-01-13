@@ -24,5 +24,11 @@
 		"isSensitive": false,
 		"description": "Bring list uuid",
 		"display": "hidden"
+	},
+	"overwriteListUuid": {
+		"defaultValue": "",
+		"dataType": "string",
+		"isSensitive": false,
+		"description": "Bring list uuid - provide your own listUuid if you don't want to use the default list!"
 	}
 }

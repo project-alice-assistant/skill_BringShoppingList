@@ -20,6 +20,7 @@ class BringShoppingList(AliceSkill):
 		super().__init__()
 		self._uuid = self.getConfig('uuid')
 		self._uuidlist = self.getConfig('listUuid')
+		self._overwriteUuidlist = self.getConfig('overwriteListUuid')
 		self._bring = None
 
 
@@ -35,7 +36,10 @@ class BringShoppingList(AliceSkill):
 				self.updateConfig('uuid', self._uuid)
 				self.updateConfig('listUuid', self._uuidlist)
 
-			self._bring = BringApi(self._uuid, self._uuidlist)
+			if self._overwriteUuidlist:
+				self._bring = BringApi(self._uuid, self._overwriteUuidlist)
+			else:
+				self._bring = BringApi(self._uuid, self._uuidlist)
 		return self._bring
 
 
