@@ -10,7 +10,7 @@
         "Psychokiller1888"
     ],
     "desc": "Maintain your Bring! Shopping list.",
-    "aliceMinVersion": "1.0.0-b6",
+    "aliceMinVersion": "1.0.0-b5",
     "systemRequirements": [],
     "pipRequirements": [
         "BringApi==0.0.5"
