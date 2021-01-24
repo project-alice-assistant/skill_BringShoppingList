@@ -6,7 +6,6 @@ from core.webui.model.WidgetSizes import WidgetSizes
 from BringApi.BringApi import BringApi
 import json
 
-
 class BringShoppingList(Widget):
 	DEFAULT_SIZE = WidgetSizes.w_large_tall
 	DEFAULT_OPTIONS: dict = dict()
@@ -16,7 +15,7 @@ class BringShoppingList(Widget):
 		super().__init__(data)
 
 
-	def getList(self) -> str:
+	def getList(self) -> dict:
 		try:
 			uuid = self.skillInstance.getConfig('uuid')
 			uuidList = self.skillInstance.getConfig('listUuid')
