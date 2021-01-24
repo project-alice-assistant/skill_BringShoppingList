@@ -41,13 +41,13 @@ class BringShoppingList_BringShoppingList {
 			if (!answer.ok) {
 				$list.html("<div class='BringWidgetError'>Bring! Shopping List - ERROR: " + answer.statusText + "</div>");
 			} else if ('success' in answer && !answer['success']) {
-				$list.html("<div class='BringWidgetError'>Bring! Shopping List - ERROR: " + answer['error'] + "</div>");
+				$list.html("<div class='BringWidgetError'>Bring! Shopping List - ERROR: " + answer['message'] + "</div>");
 				return;
 			}
 			return answer.json()
 		}).then(function (answer) {
 			let $list = $('#BringShoppingList_list');
-			answer = answer.data
+			answer = answer.data['items']
 
 			// Build a list of items that are on the list
 			let items = {};
