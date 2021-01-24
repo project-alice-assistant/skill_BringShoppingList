@@ -27,9 +27,9 @@ class BringShoppingList(Widget):
 			details = bringList.get_items_detail()
 			itemList = [{"text": self.translate(item['name'], translation), "image": self.get_image(details, item['name'])} for item in items]
 
-			return json.dumps(itemList)
+			return itemList
 		except Exception as e:
-			return json.dumps({'success':False,'error':str(e)})
+			return {'success':False,'error':str(e)}
 
 
 	@staticmethod
