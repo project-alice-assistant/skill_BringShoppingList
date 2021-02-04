@@ -3,8 +3,9 @@ class BringShoppingList_BringShoppingList {
 	constructor(uid, widgetId) {
 		this.uid = uid;
 		this.widgetId = widgetId;
+		this.aliceSettings = JSON.parse(window.sessionStorage.aliceSettings);
 		this.refresh();
-		self = this
+		self = this;
 		setInterval(function() { self.refresh() }, 1000* 10);
 	}
 
@@ -29,7 +30,7 @@ class BringShoppingList_BringShoppingList {
 
 	refresh() {
 		self = this
-		fetch(`http://${window.location.hostname}:5001/api/v1.0.1/widgets/${this.widgetId}/function/getList/`, {
+		fetch(`http://${this.aliceSettings['aliceIp']}:${this.aliceSettings['apiPort']}/api/v1.0.1/widgets/${this.widgetId}/function/getList/`, {
 			method: 'POST',
 			body: '{}',
 			headers: {
