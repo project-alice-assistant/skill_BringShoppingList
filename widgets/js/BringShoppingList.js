@@ -5,8 +5,7 @@ class BringShoppingList_BringShoppingList {
 		this.widgetId = widgetId;
 		this.aliceSettings = JSON.parse(window.sessionStorage.aliceSettings);
 		this.refresh();
-		self = this;
-		setInterval(function() { self.refresh() }, 1000* 10);
+		setInterval(()=>this.refresh(), 1000* 10);
 	}
 
 	static getIconName(val) {
