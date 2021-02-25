@@ -4,6 +4,7 @@ class BringShoppingList_BringShoppingList {
 		this.uid = uid;
 		this.widgetId = widgetId;
 		this.aliceSettings = JSON.parse(window.sessionStorage.aliceSettings);
+		this.myDiv = document.querySelector(`[data-ref="BringShoppingList_${this.uid}"]`)
 		this.refresh();
 		setInterval(()=>this.refresh(), 1000* 10);
 	}
@@ -37,7 +38,7 @@ class BringShoppingList_BringShoppingList {
 				'content-type': 'application/json'
 			}
 		}).then(function(answer){
-			let $list = $('#BringShoppingList_list');
+			let $list = self.myDiv.querySelector('#BringShoppingList_list');
 			if (!answer.ok) {
 				$list.html("<div class='BringWidgetError'>Bring! Shopping List - ERROR: " + answer.statusText + "</div>");
 			} else if ('success' in answer && !answer['success']) {
@@ -46,17 +47,18 @@ class BringShoppingList_BringShoppingList {
 			}
 			return answer.json()
 		}).then(function (answer) {
-			let $list = $('#BringShoppingList_list');
+			let $list = self.myDiv.querySelector('#BringShoppingList_list');
 			answer = answer.data['items']
 
 			// Build a list of items that are on the list
-			let items = {};
-			$.each(answer, function (i, item) {
+			let items = [];
+			for(const item of answer){
 				items[item['text']] = item;
-			});
+			};
 
 			// First remove what's gone from the list
-			$list.find('img').each(function () {
+
+			Array.from($list.childNodes).forEach(function () {
 				if (!($(this).attr('id') in items)) {
 					$(this).parent().remove();
 				}
@@ -65,16 +67,15 @@ class BringShoppingList_BringShoppingList {
 			// Then add what's new
 			for (const [itemName, item] of Object.entries(items)) {
 				if(item['image'] === undefined) return;
-				if ($(`#${BringShoppingList_BringShoppingList.getIconName(item['image'])}`).length === 0) {
-					$list.append(
-						$(`
-							<div class="tile">
-								<div class="BringShoppingTile_imgCont"></div>
-								<img alt="${itemName}" class="BringShoppingItemIcon" id="${BringShoppingList_BringShoppingList.getIconName(item['image'])}" src="https://web.getbring.com/assets/images/items/${BringShoppingList_BringShoppingList.getIconName(item['image'])}" 
-								onerror="this.onerror=null; this.src='https://web.getbring.com/assets/images/items/${item['image'][0].toLowerCase()}.png';"/>
-								<br/>${itemName}</div>
-						`)
-					);
+				if ($list.querySelector(`#${BringShoppingList_BringShoppingList.getIconName(item['image'])}`) === null) {
+				 	let temp = document.createElement("div");
+				 	temp.className = "tile"
+					temp.innerHTML = '<div class="BringShoppingTile_imgCont"></div>' +
+						'<img alt="'+ itemName + '" class="BringShoppingItemIcon" ' +
+						'id="'+BringShoppingList_BringShoppingList.getIconName(item['image'])+'" src="https://web.getbring.com/assets/images/items/'+BringShoppingList_BringShoppingList.getIconName(item['image'])+'"\n' +
+						'onerror="this.onerror=null; this.src=\'https://web.getbring.com/assets/images/items/'+item['image'][0].toLowerCase()+'.png\';"/>\n' +
+						'<br/>'+itemName;
+					$list.appendChild(temp);
 				}
 			}
 		})
