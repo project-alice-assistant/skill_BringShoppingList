@@ -58,9 +58,9 @@ class BringShoppingList_BringShoppingList {
 
 			// First remove what's gone from the list
 
-			Array.from($list.childNodes).forEach(function () {
-				if (!($(this).attr('id') in items)) {
-					$(this).parent().remove();
+			Array.from($list.childNodes).forEach(function (node) {
+				if (!(node.id in items)) {
+					node.remove();
 				}
 			});
 
@@ -68,8 +68,9 @@ class BringShoppingList_BringShoppingList {
 			for (const [itemName, item] of Object.entries(items)) {
 				if(item['image'] === undefined) return;
 				if ($list.querySelector(`#${BringShoppingList_BringShoppingList.getIconName(item['image'])}`) === null) {
-				 	let temp = document.createElement("div");
+				 	let temp = document.createElement("div")
 				 	temp.className = "tile"
+					temp.id = BringShoppingList_BringShoppingList.getIconName(item['image'])
 					temp.innerHTML = '<div class="BringShoppingTile_imgCont"></div>' +
 						'<img alt="'+ itemName + '" class="BringShoppingItemIcon" ' +
 						'id="'+BringShoppingList_BringShoppingList.getIconName(item['image'])+'" src="https://web.getbring.com/assets/images/items/'+BringShoppingList_BringShoppingList.getIconName(item['image'])+'"\n' +
