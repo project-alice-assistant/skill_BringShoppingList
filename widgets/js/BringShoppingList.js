@@ -6,7 +6,11 @@ class BringShoppingList_BringShoppingList {
 		this.aliceSettings = JSON.parse(window.sessionStorage.aliceSettings);
 		this.myDiv = document.querySelector(`[data-ref="BringShoppingList_${this.uid}"]`)
 		this.refresh();
-		setInterval(()=>this.refresh(), 1000* 10);
+		this.interval = setInterval(()=>this.refresh(), 1000* 10);
+	}
+
+	stop(){
+		clearInterval(this.interval)
 	}
 
 	static getIconName(val) {
