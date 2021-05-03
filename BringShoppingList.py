@@ -1,6 +1,5 @@
-from typing import Tuple
-
 from BringApi.BringApi import BringApi
+from typing import Tuple
 
 from core.ProjectAliceExceptions import SkillStartingFailed
 from core.base.model.AliceSkill import AliceSkill
@@ -30,6 +29,13 @@ class BringShoppingList(AliceSkill):
 
 
 	def bring(self):
+		# check if the credentials have changed. if so, get new login.
+		if self._bring is not None \
+				and (self._bring.bringUUID != self._uuid
+				     or self._overwriteUuidlist and self._bring.bringListUUID != self._overwriteUuidlist
+				     or not self._overwriteUuidlist and self._bring.bringListUUID != self._uuidlist):
+			self._bring = None
+
 		if not self._bring:
 			if not self._uuid or not self._uuidlist:
 				self._uuid, self._uuidlist = BringApi.login(self.getConfig('bringEmail'), self.getConfig('bringPassword'))
