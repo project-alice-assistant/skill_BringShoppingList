@@ -3,13 +3,15 @@
 		"defaultValue": "",
 		"dataType": "string",
 		"isSensitive": false,
-		"description": "Bring email"
+		"description": "Bring email",
+		"onUpdate": "reloadConfig"
 	},
 	"bringPassword": {
 		"defaultValue": "",
 		"dataType": "string",
 		"isSensitive": true,
-		"description": "Bring password"
+		"description": "Bring password",
+		"onUpdate": "reloadConfig"
 	},
 	"uuid": {
 		"defaultValue": "",
@@ -29,6 +31,7 @@
 		"defaultValue": "",
 		"dataType": "string",
 		"isSensitive": false,
-		"description": "Bring list uuid - provide your own listUuid if you don't want to use the default list!"
+		"description": "Bring list uuid - provide your own listUuid if you don't want to use the default list!",
+		"onUpdate": "reloadConfig"
 	}
 }

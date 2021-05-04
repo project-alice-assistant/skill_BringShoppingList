@@ -17,35 +17,48 @@ class BringShoppingList(AliceSkill):
 
 	def __init__(self):
 		super().__init__()
-		self._uuid = self.getConfig('uuid')
-		self._uuidlist = self.getConfig('listUuid')
-		self._overwriteUuidlist = self.getConfig('overwriteListUuid')
+		self._uuid = None
+		self._uuidlist = None
+		self._overwriteUuidlist = None
 		self._bring = None
 
 
 	def onStart(self):
 		super().onStart()
+		self.reloadConfig()
 		self._connectAccount()
+
+
+	def reloadConfig(self, dummy = None):
+		self.logInfo('Bring! config reloading...')
+		self._uuid = self.getConfig('uuid')
+		self._uuidlist = self.getConfig('listUuid')
+		self._overwriteUuidlist = self.getConfig('overwriteListUuid')
+		self._bring = None
+		self.bring()
+		self.logInfo('Bring! config reload done!')
+		return True
 
 
 	def bring(self):
 		# check if the credentials have changed. if so, get new login.
-		if self._bring is not None \
-				and (self._bring.bringUUID != self._uuid
-				     or self._overwriteUuidlist and self._bring.bringListUUID != self._overwriteUuidlist
-				     or not self._overwriteUuidlist and self._bring.bringListUUID != self._uuidlist):
-			self._bring = None
-
 		if not self._bring:
 			if not self._uuid or not self._uuidlist:
+				self.logInfo('New Login required using mail and password')
 				self._uuid, self._uuidlist = BringApi.login(self.getConfig('bringEmail'), self.getConfig('bringPassword'))
 				self.updateConfig('uuid', self._uuid)
 				self.updateConfig('listUuid', self._uuidlist)
+
+			self.logInfo(f'Getting new instance of Bring! with uuid {self._uuid}, default list {self._uuidlist} and custom list {self._overwriteUuidlist}')
 
 			if self._overwriteUuidlist:
 				self._bring = BringApi(self._uuid, self._overwriteUuidlist)
 			else:
 				self._bring = BringApi(self._uuid, self._uuidlist)
+
+			itemlist = ", ".join([f'{item["name"]} ({item["listUuid"]})' for item in self._bring.load_lists().json()["lists"]])
+			self.logInfo(f'Available Bring! lists are {itemlist}. Currently using {self._bring.bringListUUID}')
+
 		return self._bring
 
 
