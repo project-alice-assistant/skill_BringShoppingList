@@ -4,14 +4,16 @@
 		"dataType": "string",
 		"isSensitive": false,
 		"description": "Bring email",
-		"onUpdate": "reloadConfig"
+		"onUpdate": "reloadConfig",
+		"obligatory": true
 	},
 	"bringPassword": {
 		"defaultValue": "",
 		"dataType": "string",
 		"isSensitive": true,
 		"description": "Bring password",
-		"onUpdate": "reloadConfig"
+		"onUpdate": "reloadConfig",
+		"obligatory": true
 	},
 	"uuid": {
 		"defaultValue": "",
