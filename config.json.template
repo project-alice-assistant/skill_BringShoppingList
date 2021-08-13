@@ -32,7 +32,7 @@
   "uuid": {
     "dataType": "string",
     "defaultValue": "",
-    "description": "Bring user uuid!A",
+    "description": "Bring user uuid!",
     "display": "hidden",
     "isSensitive": false
   }
