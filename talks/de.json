@@ -213,5 +213,11 @@
   },
   "state_con": [
     "{} , aber {}"
-  ]
+  ],
+  "asdf": {
+    "default": [
+      "I need an \u00dc and \u00e4 und\u00df und \u00d6\u00dc\u00c4"
+    ],
+    "short": []
+  }
 }
