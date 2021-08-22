@@ -9,8 +9,8 @@
     ],
     "online": true
   },
-  "desc": "Maintain your Bring! Shopping list.",
-  "icon": "fas fa-shopping-bag",
+  "desc": "Maintain your Bring! Shopping list. Add, delete, search - what ever you like!",
+  "icon": "fas fa-users",
   "maintainers": [
     "maxbachmann",
     "Psychokiller1888"

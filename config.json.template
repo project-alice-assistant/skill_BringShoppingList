@@ -35,5 +35,12 @@
     "description": "Bring user uuid!",
     "display": "hidden",
     "isSensitive": false
+  },
+  "uuid2": {
+    "dataType": "string",
+    "defaultValue": "",
+    "description": "Bring user uuid!",
+    "display": "hidden",
+    "isSensitive": false
   }
 }
