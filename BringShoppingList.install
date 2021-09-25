@@ -1,19 +1,25 @@
 {
-	"name": "BringShoppingList",
-	"version": "1.1.0",
-	"icon": "fas fa-shopping-bag",
-	"category": "shopping",
-	"author": "philipp2310",
-	"maintainers": ["maxbachmann", "Psychokiller1888"],
-	"desc": "Maintain your Bring! Shopping list",
-	"aliceMinVersion": "1.0.0-a5",
-	"systemRequirements": [],
-	"pipRequirements": ["BringApi==0.0.5"],
-	"conditions": {
-		"lang": [
-			"en",
-			"de"
-		],
-		"online": true
-	}
+  "aliceMinVersion": "1.0.0-b5",
+  "author": "philipp2310",
+  "category": "shopping",
+  "conditions": {
+    "lang": [
+      "en",
+      "de"
+    ],
+    "online": true
+  },
+  "desc": "Maintain your Bring! Shopping list. Add, delete, search - what ever you like!",
+  "icon": "fas fa-users",
+  "maintainers": [
+    "maxbachmann",
+    "Psychokiller1888"
+  ],
+  "name": "BringShoppingList",
+  "pipRequirements": [
+    "BringApi==0.0.5"
+  ],
+  "speakableName": "Bring Shopping list",
+  "systemRequirements": [],
+  "version": "1.1.27"
 }

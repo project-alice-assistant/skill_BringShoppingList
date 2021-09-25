@@ -1,12 +1,11 @@
+from BringApi.BringApi import BringApi
 from typing import Tuple
 
-from BringApi.BringApi import BringApi
-
 from core.ProjectAliceExceptions import SkillStartingFailed
-from core.base.model.Intent import Intent
 from core.base.model.AliceSkill import AliceSkill
+from core.base.model.Intent import Intent
 from core.dialog.model.DialogSession import DialogSession
-from core.util.Decorators import AnyExcept, Online, IntentHandler
+from core.util.Decorators import AnyExcept, IntentHandler, Online
 
 
 class BringShoppingList(AliceSkill):
@@ -15,26 +14,51 @@ class BringShoppingList(AliceSkill):
 	Description: maintaines a Bring! shopping list
 	"""
 
+
 	def __init__(self):
 		super().__init__()
-		self._uuid = self.getConfig('uuid')
-		self._uuidlist = self.getConfig('listUuid')
+		self._uuid = None
+		self._uuidlist = None
+		self._overwriteUuidlist = None
 		self._bring = None
 
 
 	def onStart(self):
 		super().onStart()
+		self.reloadConfig()
 		self._connectAccount()
 
 
+	def reloadConfig(self, dummy = None):
+		self.logInfo('Bring! config reloading...')
+		self._uuid = self.getConfig('uuid')
+		self._uuidlist = self.getConfig('listUuid')
+		self._overwriteUuidlist = self.getConfig('overwriteListUuid')
+		self._bring = None
+		self.bring()
+		self.logInfo('Bring! config reload done!')
+		return True
+
+
 	def bring(self):
+		# check if the credentials have changed. if so, get new login.
 		if not self._bring:
 			if not self._uuid or not self._uuidlist:
+				self.logInfo('New Login required using mail and password')
 				self._uuid, self._uuidlist = BringApi.login(self.getConfig('bringEmail'), self.getConfig('bringPassword'))
 				self.updateConfig('uuid', self._uuid)
 				self.updateConfig('listUuid', self._uuidlist)
 
-			self._bring = BringApi(self._uuid, self._uuidlist)
+			self.logInfo(f'Getting new instance of Bring! with uuid {self._uuid}, default list {self._uuidlist} and custom list {self._overwriteUuidlist}')
+
+			if self._overwriteUuidlist:
+				self._bring = BringApi(self._uuid, self._overwriteUuidlist)
+			else:
+				self._bring = BringApi(self._uuid, self._uuidlist)
+
+			itemlist = ", ".join([f'{item["name"]} ({item["listUuid"]})' for item in self._bring.load_lists().json()["lists"]])
+			self.logInfo(f'Available Bring! lists are {itemlist}. Currently using {self._bring.bringListUUID}')
+
 		return self._bring
 
 
@@ -43,7 +67,7 @@ class BringShoppingList(AliceSkill):
 		try:
 			self._bring = self.bring()
 		except BringApi.AuthentificationFailed:
-			raise SkillStartingFailed(self._name, 'Please check your account login and password')
+			raise SkillStartingFailed(skillName=self._name, error='Please check your account login and password')
 
 
 	def _deleteCompleteList(self):
@@ -115,19 +139,22 @@ class BringShoppingList(AliceSkill):
 			item = ''.join([slot.value['value'] for slot in session.slotsAsObjects['Letters']])
 			return [item.capitalize()]
 
-		items = [x.value['value'] for x in session.slotsAsObjects.get('shopItem', list()) if x.value['value'] != "unknownword"]
+		items = [x.value['value'] for x in session.slotsAsObjects.get('shopItem', list()) if x.value['value'] != 'unknownword']
 
 		if not items:
 			self.continueDialog(
 				sessionId=session.sessionId,
 				text=self.randomTalk(f'{answer}_what'),
-				intentFilter=[Intent('whatItem_bringshop'), Intent('SpellWord')],
-				currentDialogState=intent.split(':')[-1])
+				intentFilter=[Intent('Bring_whatItem')],
+				currentDialogState=intent.split(':')[-1].split('/')[-1],
+				slot='buyable',
+				probabilityThreshold=0.1
+			)
 		return items
 
 
 	### INTENTS ###
-	@IntentHandler('deleteList_bringshop')
+	@IntentHandler('Bring_deleteList')
 	@Online
 	def delListIntent(self, session: DialogSession):
 		self.continueDialog(
@@ -139,7 +166,7 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('AnswerYesOrNo', requiredState='confDelList_Bring', isProtected=True)
+	@IntentHandler('AnswerYesOrNo', requiredState='confDelList_Bring')
 	def confDelIntent(self, session: DialogSession):
 		if self.Commons.isYes(session):
 			self._deleteCompleteList()
@@ -150,9 +177,9 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('addItem_bringshop')
-	@IntentHandler('whatItem_bringshop', requiredState='addItem_bringshop', isProtected=True)
-	@IntentHandler('SpellWord', requiredState='addItem_bringshop', isProtected=True)
+	@IntentHandler('Bring_addItem')
+	@IntentHandler('Bring_whatItem', requiredState='Bring_addItem')
+	@IntentHandler('SpellWord', requiredState='Bring_addItem')
 	def addItemIntent(self, session: DialogSession):
 		items = self._getShopItems('add', session)
 		if items:
@@ -162,9 +189,9 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('deleteItem_bringshop')
-	@IntentHandler('whatItem_bringshop', requiredState='deleteItem_bringshop', isProtected=True)
-	@IntentHandler('SpellWord', requiredState='deleteItem_bringshop', isProtected=True)
+	@IntentHandler('Bring_deleteItem')
+	@IntentHandler('Bring_whatItem', requiredState='Bring_deleteItem')
+	@IntentHandler('SpellWord', requiredState='Bring_deleteItem')
 	def delItemIntent(self, session: DialogSession):
 		items = self._getShopItems('rem', session)
 		if items:
@@ -174,9 +201,9 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('checkList_bringshop', isProtected=True)
-	@IntentHandler('whatItem_bringshop', requiredState='checkList_bringshop', isProtected=True)
-	@IntentHandler('SpellWord', requiredState='checkList_bringshop', isProtected=True)
+	@IntentHandler('Bring_checkList')
+	@IntentHandler('Bring_whatItem', requiredState='Bring_checkList')
+	@IntentHandler('SpellWord', requiredState='Bring_checkList')
 	def checkListIntent(self, session: DialogSession):
 		items = self._getShopItems('chk', session)
 		if items:
@@ -186,7 +213,7 @@ class BringShoppingList(AliceSkill):
 
 	@AnyExcept(exceptions=BringApi.AuthentificationFailed, text='authFailed')
 	@Online
-	@IntentHandler('readList_bringshop')
+	@IntentHandler('Bring_readList')
 	def readListIntent(self, session: DialogSession):
 		"""read the content of the list"""
 		items = self.bring().get_items(self.LanguageManager.activeLanguageAndCountryCode)['purchase']
