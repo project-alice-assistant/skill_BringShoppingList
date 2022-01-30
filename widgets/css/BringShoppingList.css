@@ -2,7 +2,7 @@
 	height: 100%;
 	padding: 5px;
 	box-sizing: border-box;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .BringShoppingList .shoppingList-fetch-failed {

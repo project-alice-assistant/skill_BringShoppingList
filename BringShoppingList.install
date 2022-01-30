@@ -1,12 +1,11 @@
 {
     "name": "BringShoppingList",
     "speakableName": "Bring Shopping list",
-    "version": "1.1.27",
+    "version": "1.1.28",
     "icon": "fas fa-shopping-bag",
     "category": "shopping",
     "author": "philipp2310",
     "maintainers": [
-        "maxbachmann",
         "Psychokiller1888"
     ],
     "desc": "Maintain your Bring! Shopping list.",
