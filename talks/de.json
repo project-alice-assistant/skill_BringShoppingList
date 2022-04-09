@@ -49,13 +49,6 @@
       "Was soll ich hinzuf\u00fcgen?"
     ]
   },
-  "asdf": {
-    "default": [
-      "gfhjhjkg\u00e4\u00f6\u00fcp",
-      "I need an \u00dc and \u00e4 und\u00df und \u00d6\u00dc\u00c4"
-    ],
-    "short": []
-  },
   "authFailed": [
     "Authentifizierung fehlgeschlagen. Bitte pr\u00fcfe deine Login Daten in den Einstellungen."
   ],
