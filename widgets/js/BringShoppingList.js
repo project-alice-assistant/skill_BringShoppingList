@@ -1,6 +1,19 @@
-(function () {
+class BringShoppingList_BringShoppingList {
 
-	function getIconName(val){
+	constructor(uid, widgetId) {
+		this.uid = uid;
+		this.widgetId = widgetId;
+		this.aliceSettings = JSON.parse(window.sessionStorage.aliceSettings);
+		this.myDiv = document.querySelector(`[data-ref="BringShoppingList_${this.uid}"]`)
+		this.refresh();
+		this.interval = setInterval(()=>this.refresh(), 1000* 10);
+	}
+
+	stop(){
+		clearInterval(this.interval)
+	}
+
+	static getIconName(val) {
 		let fileName = val.toLowerCase();
 		let repl = {
 			"\\s" : "_",
