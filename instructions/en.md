@@ -20,3 +20,6 @@ With this skill you can control your Bring! shopping list with alice and even sh
     - "What is on my shopping list?"
 - Delete your complete shopping list at once
     - "Delete my complete shopping list" - "Are you sure?" - "Yes!"
+
+
+Enjoy!

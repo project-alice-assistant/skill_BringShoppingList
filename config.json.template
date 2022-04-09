@@ -1,39 +1,46 @@
 {
-	"bringEmail": {
-		"defaultValue": "",
-		"dataType": "string",
-		"isSensitive": false,
-		"description": "Bring email",
-		"onUpdate": "reloadConfig",
-		"obligatory": true
-	},
-	"bringPassword": {
-		"defaultValue": "",
-		"dataType": "string",
-		"isSensitive": true,
-		"description": "Bring password",
-		"onUpdate": "reloadConfig",
-		"obligatory": true
-	},
-	"uuid": {
-		"defaultValue": "",
-		"dataType": "string",
-		"isSensitive": false,
-		"description": "Bring user uuid",
-		"display": "hidden"
-	},
-	"listUuid": {
-		"defaultValue": "",
-		"dataType": "string",
-		"isSensitive": false,
-		"description": "Bring list uuid",
-		"display": "hidden"
-	},
-	"overwriteListUuid": {
-		"defaultValue": "",
-		"dataType": "string",
-		"isSensitive": false,
-		"description": "Bring list uuid - provide your own listUuid if you don't want to use the default list!",
-		"onUpdate": "reloadConfig"
-	}
+  "bringEmail": {
+    "dataType": "string",
+    "defaultValue": "",
+    "description": "Bring email",
+    "isSensitive": false,
+    "obligatory": true,
+    "onUpdate": "reloadConfig"
+  },
+  "bringPassword": {
+    "dataType": "string",
+    "defaultValue": "",
+    "description": "Bring password",
+    "isSensitive": true,
+    "obligatory": true,
+    "onUpdate": "reloadConfig"
+  },
+  "listUuid": {
+    "dataType": "string",
+    "defaultValue": "",
+    "description": "Bring list uuid",
+    "display": "hidden",
+    "isSensitive": false
+  },
+  "overwriteListUuid": {
+    "dataType": "string",
+    "defaultValue": "",
+    "description": "Bring list uuid - provide your own listUuid if you don't want to use the default list!",
+    "isSensitive": false,
+    "onUpdate": "reloadConfig"
+  },
+  "uuid": {
+    "dataType": "string",
+    "defaultValue": "",
+    "description": "Bring user uuid!",
+    "display": "hidden",
+    "isSensitive": false
+  },
+  "uuid2": {
+    "dataType": "string",
+    "defaultValue": "",
+    "description": "Bring user uuid!",
+    "display": "hidden",
+    "isSensitive": false
+  }
 }
