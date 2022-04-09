@@ -6,7 +6,7 @@
 View and edit your Bring! Shopping list
 
 - Author: philipp2310
-- Maintainers: maxbachmann, Psychokiller1888
+- Maintainers: Psychokiller1888
 - Languages:
   - en
   - de
