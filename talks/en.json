@@ -213,11 +213,5 @@
   },
   "state_con": [
     "{}, but {}"
-  ],
-  "asdf": {
-    "default": [
-      "asdf"
-    ],
-    "short": []
-  }
+  ]
 }
